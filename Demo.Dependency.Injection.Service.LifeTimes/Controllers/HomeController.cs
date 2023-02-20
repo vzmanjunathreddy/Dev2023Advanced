@@ -1,5 +1,6 @@
 ﻿using Demo.Dependency.Injection.Service.LifeTimes.Interfaces;
 using Demo.Dependency.Injection.Service.LifeTimes.Models;
+using Demo.Dependency.Injection.Service.LifeTimes.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text;
@@ -9,26 +10,39 @@ namespace Demo.Dependency.Injection.Service.LifeTimes.Controllers
     public class HomeController : Controller
     {
 
-        private ITransientService _traseitntService;
-        private IScopedService _scopedService;
-        private ISignleTonService _signleTonService;
-        public HomeController(ITransientService traseintService, IScopedService scopedService, ISignleTonService signleTonService)
+        private ITransientService _transientService1;
+        private ITransientService _transientService2;
+
+        private IScopedService _scopedService1;
+        private IScopedService _scopedService2;
+
+        private ISignleTonService _signleTonService1;
+        private ISignleTonService _signleTonService2;
+
+        public HomeController(ITransientService traseintService1, ITransientService transientService2,
+                              IScopedService scopedService1, IScopedService scopedService2,
+                              ISignleTonService signleTonService1, ISignleTonService signleTonService2)
         {
-            _traseitntService = traseintService;
-            _scopedService = scopedService;
-            _signleTonService = signleTonService;
+            _transientService1 = traseintService1;
+            _transientService2 = transientService2;
+
+            _scopedService1 = scopedService1;
+            _scopedService2 = scopedService2;
+
+            _signleTonService1 = signleTonService1;
+            _signleTonService2= signleTonService2;
         }
 
         public IActionResult Index()
         {
-            var demoTransientservice1 = _traseitntService.GetGuid();
-            var demoTransientservice2 = _traseitntService.GetGuid();
+            var demoTransientservice1 = _transientService1.GetGuid();
+            var demoTransientservice2 = _transientService2.GetGuid();
 
-            var demoscopedservice1 = _scopedService.GetGuid();
-            var demoscopedservice2 = _scopedService.GetGuid();
+            var demoscopedservice1 = _scopedService1.GetGuid();
+            var demoscopedservice2 = _scopedService2.GetGuid();
 
-            var demosignleTonService1 = _signleTonService.GetGuid();
-            var demosignleTonService2 = _signleTonService.GetGuid();
+            var demosignleTonService1 = _signleTonService1.GetGuid();
+            var demosignleTonService2 = _signleTonService2.GetGuid();
 
             StringBuilder serviceLifeTimeStringbuilder= new StringBuilder();
 
