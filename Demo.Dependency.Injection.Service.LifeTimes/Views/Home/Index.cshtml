@@ -1,8 +1,31 @@
-﻿@{
+﻿@using Demo.Dependency.Injection.Service.LifeTimes.Interfaces;
+
+@inject IOrderService _orderService
+@{
     ViewData["Title"] = "Home Page";
+    var ordersCollection =  await _orderService.GetOrdersList();
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">CreateDate</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+    <tbody>
+@foreach (var order in ordersCollection)
+{     
+            <tr>
+                <td>@order.CreatedDate</td>
+                <td>@order.price</td>
+                <td>@order.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

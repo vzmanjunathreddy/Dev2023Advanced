@@ -1,6 +1,20 @@
-﻿@{
+﻿@using Microsoft.Extensions.Configuration
+@*
+    @inject is a directive which helps to do the dependency injection into the views
+
+  *@
+@inject IConfiguration _config;
+
+@{
     ViewData["Title"] = "Privacy Policy";
+    var orders = _config.GetSection("Employee:OrderedItems").Get<List<string>>();
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+<ul> 
+@foreach(var order in orders)
+{
+   <li>@order </li> 
+}
+</ul>

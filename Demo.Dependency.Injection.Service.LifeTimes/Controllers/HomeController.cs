@@ -9,7 +9,10 @@ namespace Demo.Dependency.Injection.Service.LifeTimes.Controllers
 {
     public class HomeController : Controller
     {
-
+        private IConfiguration _config;
+        public delegate  int delegateOrdersCount(); 
+            
+       #region scopes
         private ITransientService _transientService1;
         private ITransientService _transientService2;
 
@@ -19,9 +22,14 @@ namespace Demo.Dependency.Injection.Service.LifeTimes.Controllers
         private ISignleTonService _signleTonService1;
         private ISignleTonService _signleTonService2;
 
+        #endregion
+
+        private readonly IOrderService _orderService;
+
         public HomeController(ITransientService traseintService1, ITransientService transientService2,
                               IScopedService scopedService1, IScopedService scopedService2,
-                              ISignleTonService signleTonService1, ISignleTonService signleTonService2)
+                              ISignleTonService signleTonService1, ISignleTonService signleTonService2,
+                              IOrderService orderService, IConfiguration config)
         {
             _transientService1 = traseintService1;
             _transientService2 = transientService2;
@@ -30,39 +38,55 @@ namespace Demo.Dependency.Injection.Service.LifeTimes.Controllers
             _scopedService2 = scopedService2;
 
             _signleTonService1 = signleTonService1;
-            _signleTonService2= signleTonService2;
+            _signleTonService2 = signleTonService2;
+            _orderService = orderService;
+            _config = config;
+
+            delegateOrdersCount delegateOrdersCount = new delegateOrdersCount(_orderService.GetOrdersCount);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var demoTransientservice1 = _transientService1.GetGuid();
-            var demoTransientservice2 = _transientService2.GetGuid();
+            #region 
+        
 
-            var demoscopedservice1 = _scopedService1.GetGuid();
-            var demoscopedservice2 = _scopedService2.GetGuid();
+            //var demoTransientservice1 = _transientService1.GetGuid();
+            //var demoTransientservice2 = _transientService2.GetGuid();
 
-            var demosignleTonService1 = _signleTonService1.GetGuid();
-            var demosignleTonService2 = _signleTonService2.GetGuid();
+            //var demoscopedservice1 = _scopedService1.GetGuid();
+            //var demoscopedservice2 = _scopedService2.GetGuid();
 
-            StringBuilder serviceLifeTimeStringbuilder= new StringBuilder();
+            //var demosignleTonService1 = _signleTonService1.GetGuid();
+            //var demosignleTonService2 = _signleTonService2.GetGuid();
 
-            serviceLifeTimeStringbuilder.Append($"Transient Service 1 : {demoTransientservice1}\n");
-            serviceLifeTimeStringbuilder.Append($"Transient Service 2 : {demoTransientservice2}\n\n\n");
+            //StringBuilder serviceLifeTimeStringbuilder= new StringBuilder();
+
+            //serviceLifeTimeStringbuilder.Append($"Transient Service 1 : {demoTransientservice1}\n");
+            //serviceLifeTimeStringbuilder.Append($"Transient Service 2 : {demoTransientservice2}\n\n\n");
 
 
-            serviceLifeTimeStringbuilder.Append($"ScopedService Service 1 : {demoscopedservice1}\n");
-            serviceLifeTimeStringbuilder.Append($"ScopedService Service 2 : {demoscopedservice2}\n\n\n");
+            //serviceLifeTimeStringbuilder.Append($"ScopedService Service 1 : {demoscopedservice1}\n");
+            //serviceLifeTimeStringbuilder.Append($"ScopedService Service 2 : {demoscopedservice2}\n\n\n");
 
-            serviceLifeTimeStringbuilder.Append($"SignleTonService Service 1 : {demosignleTonService1}\n");
-            serviceLifeTimeStringbuilder.Append($"SignleTonService Service 2 : {demosignleTonService2}");
+            //serviceLifeTimeStringbuilder.Append($"SignleTonService Service 1 : {demosignleTonService1}\n");
+            //serviceLifeTimeStringbuilder.Append($"SignleTonService Service 2 : {demosignleTonService2}");
 
-            return Ok(serviceLifeTimeStringbuilder.ToString());
+            //return Ok(serviceLifeTimeStringbuilder.ToString());
+            #endregion
+
+            var ordersDTO = await _orderService.GetOrdersList();
+            ViewBag.OrdersList = ordersDTO;
+
+            return View(ordersDTO);
 
 
         }
+
+
 
         public IActionResult Privacy()
         {
+            var connectionString = _config.GetSection("connectionStrings:FoodDbContext").Value;
             return View();
         }
 
