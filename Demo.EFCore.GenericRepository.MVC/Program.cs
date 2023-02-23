@@ -1,12 +1,14 @@
+using Demo.EFCore.GenericRepository.MVC.Data;
+using Demo.EFCore.GenericRepository.MVC.Interfaces;
+using Demo.EFCore.GenericRepository.Service;
 using Demo.EFCore.MVC.Data;
-using Demo.EFCore.MVC.Interfaces;
-using Demo.EFCore.MVC.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var connectionString = builder.Configuration.GetSection("ConnectionString:ADVFoodDbContext").Value;
 

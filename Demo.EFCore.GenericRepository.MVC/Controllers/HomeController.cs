@@ -1,10 +1,9 @@
-﻿using Demo.EFCore.MVC.Data;
-using Demo.EFCore.MVC.Interfaces;
-using Demo.EFCore.MVC.Models;
+﻿using Demo.EFCore.GenericRepository.MVC.Interfaces;
+using Demo.EFCore.GenericRepository.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Demo.EFCore.MVC.Controllers
+namespace Demo.EFCore.GenericRepository.MVC.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,7 +11,7 @@ namespace Demo.EFCore.MVC.Controllers
 
         private readonly IFoodOrdersService _foodOrdersService;
 
-        public HomeController(ILogger<HomeController> logger, ADVFoodDbContext dbContext, IFoodOrdersService customerService)
+        public HomeController(ILogger<HomeController> logger, IFoodOrdersService customerService)
         {
             _logger = logger;
             _foodOrdersService = customerService;
@@ -20,9 +19,9 @@ namespace Demo.EFCore.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result =await _foodOrdersService.GetCustomers();
+            var result = await _foodOrdersService.GetCustomers();
 
-            var orders= await _foodOrdersService.GetOrders();
+            var orders = await _foodOrdersService.GetOrders();
 
             return View();
         }
@@ -44,4 +43,5 @@ namespace Demo.EFCore.MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }

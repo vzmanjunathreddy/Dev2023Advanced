@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddItems.cs" />
     <Compile Include="ExtensionString.cs" />
     <Compile Include="Orders.cs" />
     <Compile Include="Program.cs" />

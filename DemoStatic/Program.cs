@@ -13,18 +13,27 @@ namespace DemoStatic
         static void Main(string[] args)
         {
 
+            AddItems<string> addItems = new AddItems<string>();
+            var result1 = addItems.Addresult("Welcome to generics");
 
-            delegateOrdersCount dobj = new delegateOrdersCount(Orders.GetMaxOrders);
+            AddItems<int> addItems1 = new AddItems<int>();
+            var result2 = addItems1.Addresult(10);
 
-            var result = dobj.Invoke();
+            AddItems<double> addItems3 = new AddItems<double>();
+            var result3 = addItems3.Addresult(1000.56);
 
-           
-            Console.WriteLine(result);
-            string article = "asdfasdf sadf@ asdfasdf;asdf!asdfasdf a#";
 
-       
-            Console.WriteLine($"Count of Words {article.ADVStringExtesion()}" );
-            Console.Read();
+            //delegateOrdersCount dobj = new delegateOrdersCount(Orders.GetMaxOrders);
+
+            //var result = dobj.Invoke();
+
+
+            //Console.WriteLine(result);
+            //string article = "asdfasdf sadf@ asdfasdf;asdf!asdfasdf a#";
+
+
+            //Console.WriteLine($"Count of Words {article.ADVStringExtesion()}" );
+            //Console.Read();
         }
     }
 }
