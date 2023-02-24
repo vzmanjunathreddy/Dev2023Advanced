@@ -1,19 +1,18 @@
 ﻿using Demo.EFCore.GenericRepository.MVC.Interfaces;
-using Demo.EFCore.GenericRepository.MVC.Models;
+using Demo.EFCore.GenericRepository.Unitofwork.MVC.Interfaces;
+using Demo.EFCore.GenericRepository.Unitofwork.MVC.Models;
 using System.Collections.Generic;
 
-namespace Demo.EFCore.GenericRepository.Service
+namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Service
 {
     public class FoodOrdersService : IFoodOrdersService
     {
-        private readonly ICustomersRepository _customerRepository;
-        private readonly IOrdersRepository _ordersRepository;
-        private readonly IItemsRepository _itemsRepository;
-        public FoodOrdersService(ICustomersRepository customerRepository, IOrdersRepository ordersRepository, IItemsRepository itemsRepository)
+        private readonly IUnitofWork _unitofWork;
+
+        public FoodOrdersService(IUnitofWork unitofWork, IOrdersRepository ordersRepository, IItemsRepository itemsRepository)
         {
-            _customerRepository = customerRepository;
-            _ordersRepository = ordersRepository;
-            _itemsRepository = itemsRepository;
+            _unitofWork = unitofWork;
+
         }
 
         public Task<bool> AddfoodOrder(CustomersDTO customers)
@@ -40,7 +39,7 @@ namespace Demo.EFCore.GenericRepository.Service
             {
                 newCustomersCollection = new List<CustomersDTO>();
 
-                var customers = await _customerRepository.GetAll();
+                var customers = await _unitofWork.CustomersRepository.GetAll();
 
                 // customersCollection = customers!=null? customers.ToList():null;
 
@@ -77,7 +76,7 @@ namespace Demo.EFCore.GenericRepository.Service
 
         public async Task<IEnumerable<OrdersDTO>> GetOrders()
         {
-            return _ordersRepository.GetAll().Result.Select(x => new OrdersDTO
+            return _unitofWork.OrdersRepository.GetAll().Result.Select(x => new OrdersDTO
             {
                 CreatedDate = x.CreatedDate,
                 CustomerId = x.CustomerId,

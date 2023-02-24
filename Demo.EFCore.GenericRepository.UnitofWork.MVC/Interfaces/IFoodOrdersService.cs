@@ -1,6 +1,6 @@
-﻿using Demo.EFCore.GenericRepository.MVC.Models;
+﻿using Demo.EFCore.GenericRepository.Unitofwork.MVC.Models;
 
-namespace Demo.EFCore.GenericRepository.MVC.Interfaces
+namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Interfaces
 {
     public interface IFoodOrdersService
     {
