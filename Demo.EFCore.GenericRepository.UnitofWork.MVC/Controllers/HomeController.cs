@@ -1,6 +1,8 @@
 ﻿using Demo.EFCore.GenericRepository.Unitofwork.MVC.Interfaces;
+using Demo.EFCore.GenericRepository.Unitofwork.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Formats.Asn1;
 
 namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Controllers
 {
@@ -22,11 +24,14 @@ namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Controllers
 
             var orders = await _foodOrdersService.GetOrders();
 
+            var items = await _foodOrdersService.GetAllItems();
+
             return View();
         }
 
-        public IActionResult Students()
+        public async Task<IActionResult> CreateFoodOrder()
         {
+            var result = await _foodOrdersService.AddfoodOrder(null);
             return View();
         }
 

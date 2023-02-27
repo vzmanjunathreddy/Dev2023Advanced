@@ -19,7 +19,7 @@ namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Data
             try
             {
                 _dbSet.Add(entity);
-                await _dbContext.SaveChangesAsync();
+              //  await _dbContext.SaveChangesAsync(); // Its going to be delegated to UnitofWork
                 isadded = true;
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Data
             try
             {
                 await _dbSet.AddRangeAsync(entities);
-                await _dbContext.SaveChangesAsync();
+               // await _dbContext.SaveChangesAsync();
                 isadded = true;
             }
             catch (Exception ex)

@@ -9,15 +9,55 @@ namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Service
     {
         private readonly IUnitofWork _unitofWork;
 
-        public FoodOrdersService(IUnitofWork unitofWork, IOrdersRepository ordersRepository, IItemsRepository itemsRepository)
+        public FoodOrdersService(IUnitofWork unitofWork)
         {
             _unitofWork = unitofWork;
 
         }
 
-        public Task<bool> AddfoodOrder(CustomersDTO customers)
+        public async Task<bool> AddfoodOrder(CustomersDTO customers)
         {
-            throw new NotImplementedException();
+           try
+            {
+                var customer = new Customers()
+                {
+                 
+                    Name = "UnitofWorkCustomer",
+                    City = "Jarkhand",
+                    Email = "uow@gmail.com",
+                    Contact = "123645"
+
+                };
+
+                var isCustomerAdded= await _unitofWork.CustomersRepository.AddEntity(customer);
+
+                var orders = new Orders()
+                {
+
+                    CustomerId = 3,
+                    Quantity = 2,
+                    CreatedDate = DateTime.Now,
+                    TotalAmount = 100
+                };
+
+                var isordersAdded = await _unitofWork.OrdersRepository.AddEntity(orders);
+
+                var items = new Items()
+                {
+                 
+                    Name = "Idly",
+                    Category = "Breakfast",
+                    Price = 30
+                };
+                var isitemsAdded = await _unitofWork.ItemsRepository.AddEntity(items);
+
+                _unitofWork.SaveChangestoDB();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return true;
         }
 
         public Task<bool> AddRangeofCustomers(IEnumerable<CustomersDTO> customers)
@@ -28,6 +68,32 @@ namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Service
         public Task<bool> DeleteCustomers(int customerId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ItemsDTO>> GetAllItems()
+        {
+            List<ItemsDTO> itemsCollection = null;
+            try
+            {
+              var  items = await _unitofWork.ItemsRepository.GetAll();
+
+                itemsCollection = new List<ItemsDTO>();
+
+                itemsCollection = items.Select(x => new ItemsDTO()
+                {
+                    Id = x.Id,
+                    Category = x.Category,
+                    ImageUrl = "",
+                    Name = x.Name,
+                    Price = x.Price
+                }).ToList();
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return itemsCollection;
         }
 
         public async Task<IEnumerable<CustomersDTO>> GetCustomers()

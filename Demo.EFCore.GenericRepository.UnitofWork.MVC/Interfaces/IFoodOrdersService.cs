@@ -1,16 +1,12 @@
 ﻿using Demo.EFCore.GenericRepository.Unitofwork.MVC.Models;
+using Demo.EFCore.GenericRepository.UnitofWork.MVC.Interfaces;
 
 namespace Demo.EFCore.GenericRepository.Unitofwork.MVC.Interfaces
 {
-    public interface IFoodOrdersService
+    public interface IFoodOrdersService : ICustomersService, IOrdersService, IItemsService
     {
-        Task<IEnumerable<CustomersDTO>> GetCustomers();
-        Task<bool> AddfoodOrder(CustomersDTO customers);
-        Task<bool> AddRangeofCustomers(IEnumerable<CustomersDTO> customers);
-        Task<bool> UpdateCustomers(CustomersDTO customers);
-        Task<bool> DeleteCustomers(int customerId);
 
-        Task<IEnumerable<OrdersDTO>> GetOrders();
+        Task<bool> AddfoodOrder(CustomersDTO customers);
 
     }
 }

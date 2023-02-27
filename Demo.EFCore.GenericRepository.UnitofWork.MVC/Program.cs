@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ADVFoodDbContext>(options =>
 builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
 builder.Services.AddTransient<IFoodOrdersService, FoodOrdersService>();
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddTransient<IUnitofWork,UnitofWork>();
 
 var app = builder.Build();
 
