@@ -1,0 +1,12 @@
+﻿@model Demo.MVC.EF.Models.ItemsDTO
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://thumbs.dreamstime.com/z/south-indian-breakfast-idli-dosa-chutney-indian-breakfast-lentil-rice-pancake-also-known-as-dosa-dumplings-known-as-idli-158574513.jpg" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name </h5>
+        <h6 class="card-subtitle mb-3 text-muted">₹@Model.Price </h6>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Category</h6>
+        <p class="card-text">I am Coming from Partial View of the card's content.</p>
+        <a href="#" class="btn btn-primary">Details</a>
+    </div>
+</div>

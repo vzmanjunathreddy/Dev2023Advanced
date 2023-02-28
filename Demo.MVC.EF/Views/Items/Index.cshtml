@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Demo.MVC.EF.Models.ItemsDTO>
+
+@foreach(var item in Model)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://thumbs.dreamstime.com/z/south-indian-breakfast-idli-dosa-chutney-indian-breakfast-lentil-rice-pancake-also-known-as-dosa-dumplings-known-as-idli-158574513.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name </h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a  asp-controller="Items" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+}

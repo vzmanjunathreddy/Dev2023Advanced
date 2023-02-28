@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.EFCore.GenericReposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.EFCore.GenericRepository.UnitofWork.MVC", "Demo.EFCore.GenericRepository.UnitofWork.MVC\Demo.EFCore.GenericRepository.UnitofWork.MVC.csproj", "{376C8040-B258-42AF-9330-60135FF84B07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.MVC.EF", "Demo.MVC.EF\Demo.MVC.EF.csproj", "{CF0DB37F-F191-4638-9D34-87120FBC32FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{376C8040-B258-42AF-9330-60135FF84B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{376C8040-B258-42AF-9330-60135FF84B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{376C8040-B258-42AF-9330-60135FF84B07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0DB37F-F191-4638-9D34-87120FBC32FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0DB37F-F191-4638-9D34-87120FBC32FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0DB37F-F191-4638-9D34-87120FBC32FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0DB37F-F191-4638-9D34-87120FBC32FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
