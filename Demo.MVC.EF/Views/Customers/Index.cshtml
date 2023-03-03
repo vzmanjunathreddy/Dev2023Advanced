@@ -1,28 +1,38 @@
-﻿@model IEnumerable<Demo.MVC.EF.Models.CustomersDTO>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<Demo.MVC.EF.Models.CustomersDTO>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-controller="Customers" type="button" class="btn btn-success"> Create </a>
 </p>
-<table class="table">
+
+
+
+
+
+
+<table class="table table-striped" style="border: 1px solid lightgrey;"> 
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Name")
+            </th>
+            <th >
+                @Html.DisplayName("City")
+         
+            </th>
+            <th >
+                @Html.DisplayName("Contact")
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayName("Contact")
             </th>
             <th></th>
         </tr>
@@ -43,11 +53,22 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <div class="d-grid gap-2 d-md-block">
+
+                        <a asp-action="Create" asp-controller="Customers" type="button" class="btn btn-success"> Create </a>
+                        <a asp-action="Edit" asp-controller="Customers" type="button" class="btn btn-primary"> Edit </a>
+                        <a asp-action="Edit" asp-controller="Customers" type="button" class="btn btn-info"> Details </a>
+                    </div>
+
             </td>
         </tr>
 }
     </tbody>
 </table>
+ 
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page = page }),
+    new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+})

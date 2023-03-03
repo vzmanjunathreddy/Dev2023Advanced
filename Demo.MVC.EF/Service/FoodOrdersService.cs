@@ -171,9 +171,10 @@ namespace Demo.MVC.EF.Service
             });
         }
 
-        public Task<bool> UpdateCustomers(CustomersDTO customers)
+        public async Task<bool> UpdateCustomers(CustomersDTO customers)
         {
-            throw new NotImplementedException();
+       
+            return false;
         }
     }
 }

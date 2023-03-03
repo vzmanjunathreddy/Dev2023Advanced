@@ -1,0 +1,22 @@
+﻿@model List<string>
+
+@foreach (var category in Model)
+{
+    <li><a class="dropdown-item" asp-controller="Items" asp-action="Index" asp-route-category="@category">@category</a></li>
+}
+
+
+@*@model Demo.MVC.EF.Models.Items
+
+@model IEnumerable<Demo.MVC.EF.Models.CategoryViewModel>
+
+
+@{
+    var categories = Model.Select(x=>x.Category).Distinct().ToList();
+}
+
+@foreach (var category in categories)
+{
+    <li><a class="dropdown-item" asp-controller="Items" asp-action="Index" asp-route-category="@category">@category</a></li>
+}
+*@

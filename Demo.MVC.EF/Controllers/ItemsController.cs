@@ -14,17 +14,27 @@ namespace Demo.MVC.EF.Controllers
             _foodOrdersService = foodOrdersService;
         }
 
-        public async Task<ActionResult> Index(string category)
+        public async Task<ActionResult> Index(string category, CustomerViewModel customerViewModel)
         {
             IEnumerable<ItemsDTO> items = null;
 
             var data = await _foodOrdersService.GetAllItemsItems();
 
-            if (category == null)
+            if (category == null && customerViewModel.Hotelmenu == null)
                 return View(data);
-            else
-                items = data.Where(x => x.Category.ToLower() == category.ToLower()).ToList();
 
+            if (customerViewModel != null && customerViewModel.Hotelmenu?.Count() > 0)
+            {
+                var menuSelected = customerViewModel.Hotelmenu;
+
+                items = data.Where(x => menuSelected.Contains(x.Category)).ToList();
+            }
+            else
+            {
+                items = data.Where(x => x.Category.ToLower() == category.ToLower()).ToList();
+            }
+                
+                
             return View(items);
         }
 

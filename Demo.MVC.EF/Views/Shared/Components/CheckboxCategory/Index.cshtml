@@ -1,0 +1,62 @@
+﻿@model Demo.MVC.EF.Models.CustomerViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@using (Html.BeginForm("Index", "Items", FormMethod.Post))
+{
+
+    <div class="form-check">
+        <input type="submit" class="btn btn-success btn-sm" value="Apply" />
+    </div>
+
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Categories
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+
+                    @foreach (var checkbox in Model.Checkboxes!)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   value=@checkbox.Value
+                                   id=cb_@checkbox.Value
+                                   name="Hotelmenu"
+                                   checked=@checkbox.isChecked>
+                            <label class="form-check-label" for="@checkbox.Value">
+                                @checkbox.Description
+                            </label>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Order Date
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                    <input class="span2" size="16" type="text" value="12-02-2012">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+}

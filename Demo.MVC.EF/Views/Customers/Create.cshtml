@@ -1,0 +1,58 @@
+﻿@model Demo.MVC.EF.Models.Customers
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <div class="col-xs-12 col-md-4">
+            <h4 style=" padding-bottom: 2%;margin-left: 5%;">
+                Create Customer
+            </h4>
+        </div>
+        <div class="col-xs-6 col-md-8">
+            <a class="btn btn-primary" asp-action="Index"
+               style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                Case List
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4" style="margin-left:5%;padding:30px;border:2px solid lavender;border-radius:10px;">
+
+            <form asp-action="Create" asp-controller="Customers" method="post">
+
+                <div class="mb-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control mb-3" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="form-label"></label>
+                        <input asp-for="City" class="form-control  mb-3" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contact" class="form-label"></label>
+                        <input asp-for="Contact" class="form-control  mb-3" />
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control  mb-3" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" style="margin-top:20px" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

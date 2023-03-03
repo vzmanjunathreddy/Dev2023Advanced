@@ -1,6 +1,9 @@
 ﻿using Demo.MVC.EF.Interfaces;
+using Demo.MVC.EF.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
+using X.PagedList;
 
 namespace Demo.MVC.EF.Controllers
 {
@@ -14,11 +17,42 @@ namespace Demo.MVC.EF.Controllers
         {
             _foodOrdersService = foodOrdersService;
         }
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-            var customers = await _foodOrdersService.GetCustomers();
+            var customers = await _foodOrdersService.GetCustomers(); // 2 sec
 
-            return View(customers);
+
+
+            var pageNumber = page ?? 1; 
+            var onePageOfProducts = customers.ToPagedList(pageNumber, 2); // will only contain 25 products max because of the pageSize
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+
+            //if(searchString != null) {
+
+            //var orders = await _foodOrdersService.GetOrders(); // 3 sec
+
+            //var items = await _foodOrdersService.GetAllItemsItems(); // 1sec
+
+
+            //     var resultofCustomers = customers.Where(x => x.Email.Contains(searchString) || x.Name.Contains(searchString) || x.City.Contains(searchString)).ToList();
+
+            //     var resultofOrders = orders.Where(x => x.Quantity.ToString().Contains(searchString)).ToList();
+
+            //     var resultofItems = items.Where(x => x.Name.Contains(searchString) || x.Category.Contains(searchString)).ToList();
+
+            //     SearchViewModel searchViewModel = new SearchViewModel()
+            //     {
+            //         Customers = resultofCustomers,
+            //         Items = items,
+            //         Orders = orders
+            //     }; var result= _dbcontext.FromSQLRaw("sp", Param)
+
+
+
+
+
+            return View(onePageOfProducts);
         }
 
         // GET: CustomersController/Details/5
@@ -33,6 +67,8 @@ namespace Demo.MVC.EF.Controllers
         }
 
         // GET: CustomersController/Create
+
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -41,7 +77,7 @@ namespace Demo.MVC.EF.Controllers
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Customers customer)
         {
             try
             {

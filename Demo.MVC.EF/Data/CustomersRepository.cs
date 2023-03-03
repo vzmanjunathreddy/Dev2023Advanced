@@ -1,5 +1,6 @@
 ﻿using Demo.MVC.EF.Interfaces;
 using Demo.MVC.EF.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.MVC.EF.Data
@@ -18,8 +19,9 @@ namespace Demo.MVC.EF.Data
             try
             {
                 // _dbset is from GenericRepository 
-
-                var customer = _dbSet.Where(x => x.Id == entity.Id).FirstOrDefault();
+                
+                 
+                 var customer = _dbSet.Where(x => x.Id == entity.Id).FirstOrDefault();
                 if (customer == null)
                 {
                     _dbSet.Add(entity);
