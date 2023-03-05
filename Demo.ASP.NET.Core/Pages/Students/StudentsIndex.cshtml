@@ -1,0 +1,108 @@
+﻿@page
+@model Demo.ASP.NET.Core.Pages.Students.StudentsIndex
+@{
+    var qualifiication = new List<SelectListItem>()
+    {
+        new SelectListItem{ Text="Post Gradutation", Value="PG"},
+        new SelectListItem{ Text="BTECH", Value="BTECH"},
+        new SelectListItem{ Text="BE", Value="BE"},
+        new SelectListItem{ Text="Graduation", Value="Degree"}
+    };
+
+    var Country = new List<string>
+    {
+        "India","USA","UK","France","Germany"
+    };
+}
+<div class="row">
+    <div class="col-md-7">
+        <form method="post" asp-page-handler="Submit">
+            <div class="card">
+                <div class="card-header">
+                    New Student Registration
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group row pb-3">
+                    <label asp-for="Student.FirstName" style="margin-left:20px" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                        <input asp-for="Student.FirstName" class="form-control" placeholder="FirstName">
+                    </div>
+                </div>
+                <div class="form-group row pb-3">
+                    <label asp-for="Student.LastName" style="margin-left:20px" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                        <input asp-for="Student.LastName" class="form-control" placeholder="LastName">
+                    </div>
+                </div>
+
+                <div class="form-group row pb-3">
+                    <label asp-for="Student.Course" style="margin-left:20px" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                        <select asp-for="Student.Course" class="form-select" asp-items="@qualifiication"> <option>Please Select</option></select>
+                    </div>
+                </div>
+
+
+                <div class="form-group row pb-3">
+                    <label asp-for="Student.Country" style="margin-left:20px" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                        <select asp-for="Student.Country" class="form-select" asp-items="new SelectList(Country)"> <option>Please Select</option></select>
+                    </div>
+                </div>
+
+
+                <div class="row form-group pb-3">
+                    <label asp-for="Student.Gender" style="margin-left:20px" class="col-sm-2 col-form-label"></label>
+
+                    <div class="col-sm-4">
+                        @foreach (var gender in System.Enum.GetValues(typeof(Gender)))
+                        {
+                            <label asp-for="Student.Gender">@gender</label>
+                            <input type="radio" asp-for="Student.Gender" value="@((int)gender)" />
+                        }
+                    </div>
+
+                </div>
+
+                <div class="form-check  pb-3" style="margin-left:30px">
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(model=>model.Student.AgreeTermsandConditions, new { @class = "form-check-input" })
+                    </div>
+
+                    <div>
+                        Agree Terms and Conditions
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group row pb-3">
+                    <div class="col-sm-6">
+                        <button type="submit" style="margin-left:20px" class="btn btn-primary">Save</button>
+                        <a asp-page="/Students/StudentsIndex" class="ml-3 btn btn-secondary"> Cancel</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+@if (Model.StudentDetails != null)
+{
+    <label>@Model.StudentDetails</label>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

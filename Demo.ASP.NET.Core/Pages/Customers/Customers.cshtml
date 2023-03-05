@@ -1,0 +1,31 @@
+﻿@page
+@model Demo.ASP.NET.Core.Pages.Customers.CustomersModel
+@using Demo.ASP.NET.Core.Service;
+@using Demo.ASP.NET.Core.Interfaces;
+@inject IFoodOrdersService _foodService;
+
+
+@{
+    var items = await _foodService.GetAllItemsItems();
+}
+
+@*<div>
+    <h4> @Model.WelcomeMessage</h4>
+
+    <div>
+        CustomerName is @Model.Customers.Name
+        Email is @Model.Customers.Email
+    </div>
+    
+</div>*@
+
+@foreach(var item in items)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">@item.Category , Price is : @item.Price.</p>
+        </div>
+    </div>
+}
