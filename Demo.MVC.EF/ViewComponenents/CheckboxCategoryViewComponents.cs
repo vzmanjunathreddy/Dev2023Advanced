@@ -26,7 +26,7 @@ namespace Demo.MVC.EF.ViewComponenents
                 {
                     Value = category,
                     Description = category,
-                    isChecked = false
+                    isChecked = category=="Beverages"?false: true
                 });
             }
 

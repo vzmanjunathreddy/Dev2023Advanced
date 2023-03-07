@@ -13,9 +13,8 @@ namespace Demo.ASP.NET.Core.Models
         public string? LastName { get;set; }
         public bool AgreeTermsandConditions { get; set; }
         public Gender Gender { get; set; }
-        public string Course { get; set; }
-
-        public string Country { get; set; }
+        public string? Course { get; set; }
+        public string? Country { get; set; }
 
     }
 

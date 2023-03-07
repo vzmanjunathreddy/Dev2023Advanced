@@ -17,7 +17,7 @@ namespace Demo.MVC.EF.Controllers
         {
             _foodOrdersService = foodOrdersService;
         }
-        public async Task<ActionResult> Index(int? page)
+        public async Task<ActionResult> Index(int? page)  // Action Methods
         {
             var customers = await _foodOrdersService.GetCustomers(); // 2 sec
 

@@ -17,7 +17,7 @@ namespace Demo.ASP.NET.Core.Pages.Students
             return Page();
         }
 
-        public IActionResult OnPostSubmit(Student student)
+        public IActionResult OnPostSubmitStudentData(Student student)
         {
 
             this.StudentDetails = $"Name of the Student is  {student.FirstName},{student.LastName}   <br/> " +

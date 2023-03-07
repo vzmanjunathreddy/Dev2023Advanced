@@ -20,7 +20,7 @@ namespace Demo.MVC.EF.Controllers
 
             if (searchString != null)
             {
-                var customers = _foodOrdersService.GetCustomers();
+                var customers = _foodOrdersService.GetCustomers(); //3sec
 
                 var orders = _foodOrdersService.GetOrders(); // 3 sec
 
