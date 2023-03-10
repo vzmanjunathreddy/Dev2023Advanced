@@ -21,6 +21,8 @@ namespace Demo.Core.CustomersAPI.Controllers
         }
 
         [HttpPost]
+        [Route("getaccesstoken")]
+        [AllowAnonymous]
         public IResult GetAccessToken([FromBody] User user)
         {
 

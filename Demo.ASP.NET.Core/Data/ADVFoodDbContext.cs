@@ -10,6 +10,10 @@ namespace Demo.ASP.NET.Core.Data
 
         }
 
+        public ADVFoodDbContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

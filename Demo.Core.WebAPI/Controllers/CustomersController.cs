@@ -17,7 +17,7 @@ namespace Demo.Core.CustomersAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetCustomers")]
+        #region old code
         //public IEnumerable<Customers> GetListofCustomers()
         //{
         //    List<Customers> customersCollection = new();
@@ -62,56 +62,35 @@ namespace Demo.Core.CustomersAPI.Controllers
         //    return customersCollection;
         //}
 
+        #endregion 
 
-        //[HttpGet]
-        //[Route("getorders")]
-        public Orders GetListofCustomers(int orderId)
+
+        [HttpGet]
+        [Route("getorders")]
+        public Orders GetOrderDetails()
         {
-            Orders orderobj = new();
 
             try
             {
-                var claimsUser = HttpContext.User.Claims.Where(x=>x.Type== "UserName").Select(x=>x.Value).First();
+                var claimsUser = HttpContext.User.Claims.Where(x => x.Type == "UserName").Select(x => x.Value).First();
 
                 var order = Orders.GetOrders();
                 var customerName = order.customerName;
 
-
-                if(customerName==claimsUser)
+                if (customerName == claimsUser)
                 {
                     return order;
                 }
 
+                return order;
+
             }
             catch (Exception ex)
             {
-
+                return null;
             }
-
-            return null;
-        }
-
-
-    }
-
-    public class Orders
-    {
-        public int OrderId { get; set; }
-
-        public string OrderName { get; set; }
-
-        public string customerName { get; set; }
-
-
-        public static Orders GetOrders()
-        {
-            Orders orders = new()
-            {
-                OrderName = "Pizza",
-                customerName = "Isha",
-                OrderId = 12
-            };
-            return orders;
         }
     }
+
+
 }
